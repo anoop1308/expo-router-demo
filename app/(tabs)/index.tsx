@@ -1,14 +1,24 @@
-import { StyleSheet } from 'react-native';
+import { Button, Pressable, StyleSheet, TextInput } from 'react-native';
 
-import EditScreenInfo from '@/components/EditScreenInfo';
 import { Text, View } from '@/components/Themed';
 
 export default function TabOneScreen() {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Tab One</Text>
-      <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-      <EditScreenInfo path="app/(tabs)/index.tsx" />
+      <TextInput placeholder='abcdef' style={styles.input} />
+      <Button
+        // onPress={onPressLearnMore}
+        title="ADD ITEM"
+        color="#841584"
+        accessibilityLabel="Learn more about this purple button"
+        touchSoundDisabled={true}
+      />
+      <View style={styles.innerDiv}>
+        <View style={styles.itemDiv}>
+          <Text>Todo - 1</Text>
+          <Text>x</Text>
+        </View>
+      </View>
     </View>
   );
 }
@@ -16,16 +26,33 @@ export default function TabOneScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
+    paddingHorizontal: 10,
+    backgroundColor: 'white'
   },
-  title: {
+  innerDiv: {
+    flex: 1,
+    backgroundColor: 'white',
+    marginTop: 10
+  },
+  input: {
     fontSize: 20,
-    fontWeight: 'bold',
+    backgroundColor: 'white',
+    width: '100%',
+    borderBottomWidth: 1,
+    marginVertical: 10,
+    paddingLeft: 5,
+    borderRadius: 5
   },
-  separator: {
-    marginVertical: 30,
-    height: 1,
-    width: '80%',
+  itemDiv: {
+    width: '100%',
+    backgroundColor: '#b9e2f5',
+    borderWidth: 0.5,
+    paddingHorizontal: 5,
+    borderColor: '#50b8e7',
+    padding: 5
   },
+  addBtn: {
+    width: "100%",
+    borderWidth: 1
+  }
 });
