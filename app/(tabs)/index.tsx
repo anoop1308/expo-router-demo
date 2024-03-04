@@ -1,24 +1,27 @@
-import { Button, Pressable, StyleSheet, TextInput } from 'react-native';
-
-import { Text, View } from '@/components/Themed';
+import { Link } from 'expo-router';
+import { Button, StyleSheet, Text, TextInput, View } from 'react-native';
 
 export default function TabOneScreen() {
   return (
     <View style={styles.container}>
-      <TextInput placeholder='abcdef' style={styles.input} />
+      <Link href='./user/1'>User - 1</Link>
+      <Link href={{
+        pathname: "/user/[id]",
+        params: { id: '2' }
+      }}>User - 2</Link>
+      {/* <TextInput placeholder='abcdef' style={styles.input} />
       <Button
-        // onPress={onPressLearnMore}
         title="ADD ITEM"
         color="#841584"
         accessibilityLabel="Learn more about this purple button"
         touchSoundDisabled={true}
       />
       <View style={styles.innerDiv}>
-        <View style={styles.itemDiv}>
+        <View className='flex flex-row bg-[#b9e2f5] border-[#50b8e7] w-full border px-1'>
           <Text>Todo - 1</Text>
           <Text>x</Text>
         </View>
-      </View>
+      </View> */}
     </View>
   );
 }
@@ -44,11 +47,6 @@ const styles = StyleSheet.create({
     borderRadius: 5
   },
   itemDiv: {
-    width: '100%',
-    backgroundColor: '#b9e2f5',
-    borderWidth: 0.5,
-    paddingHorizontal: 5,
-    borderColor: '#50b8e7',
     padding: 5
   },
   addBtn: {
