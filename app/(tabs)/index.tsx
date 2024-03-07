@@ -6,13 +6,12 @@ import { useMutation, useQuery } from '@tanstack/react-query';
 
 
 type ItemProps = { title: string, id: number };
-type TodoType = { title: string, id: number }[];
 
- const generateUUID = (digits: number) => {
+const generateUUID = (digits: number) => {
   let str = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVXZ';
   let uuid = [];
   for (let i = 0; i < digits; i++) {
-      uuid.push(str[Math.floor(Math.random() * str.length)]);
+    uuid.push(str[Math.floor(Math.random() * str.length)]);
   }
   return uuid.join('');
 }
@@ -20,27 +19,26 @@ type TodoType = { title: string, id: number }[];
 
 export default function TabOneScreen() {
   const [todo, setTodo] = useState("");
-  const [taskId, setTaskId] = useState(1);
   const { data: todoList, isLoading, error } = useQuery({
     queryKey: ["todos"],
     queryFn: () => fetch("https://jsonplaceholder.typicode.com/todos").then(res => res.json()),
   })
 
-  console.log("todoList => ", todoList)
-  
-  const {data, mutate} = useMutation({
-    mutationFn: () => fetch("https://jsonplaceholder.typicode.com/todos").then(res => res.json()).then((json: any) => addTodo(json))
+  const { mutate } = useMutation({
+    mutationFn: () => addTodo()
   })
-  console.log("mutation data => ", data)
-  const addTodo = (val: any) => {
-    if(todo.length === 0) return;
-    val.push({title: todo, id: generateUUID(10)})
+
+  const addTodo = () => {
+    if (todo.length === 0) return;
+    todoList.push({ title: todo, id: generateUUID(10) })
     setTodo("");
-    return val.reverse()
+    return todoList.reverse()
   }
-  const deleteTodo = (id: number) => {
-    // const updatedList = todoList.filter((task) => task.id !== id);
-    // setTodoList(updatedList);
+
+  const deleteTodo = (id: any) => {
+    const newTodoList = [...todoList]
+    newTodoList.filter((todo: any) => todo.id !== id);
+    return newTodoList
   }
 
   const Item = ({ title, id }: ItemProps) => (
@@ -49,7 +47,7 @@ export default function TabOneScreen() {
         <Link href={`./user/${id}`}>
           <Text className='font-bold'>{title}</Text>
         </Link>
-        <Icon onPress={() => mutate(deleteTodo(id))} name='close-circle-outline' color="red" size={26} />
+        <Icon name='close-circle-outline' color="red" size={26} />
       </View>
     </View>
   )
@@ -68,7 +66,7 @@ export default function TabOneScreen() {
         touchSoundDisabled={true}
         onPress={() => mutate()}
       />
-      <FlatList  data={data ?? todoList} renderItem={(item) => <Item title={item.item.title} id={item.item.id} />} />
+      <FlatList data={todoList} renderItem={(item) => <Item title={item.item.title} id={item.item.id} />} />
     </View>
   );
 }
