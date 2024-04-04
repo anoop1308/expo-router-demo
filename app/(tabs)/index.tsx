@@ -3,6 +3,7 @@ import Icon from 'react-native-vector-icons/Ionicons'
 import { Button, FlatList, StyleSheet, Text, TextInput, View } from 'react-native';
 import { useState } from 'react';
 import { useQueryClient, useMutation, useQuery } from '@tanstack/react-query';
+import { checkForUpdateAsync, fetchUpdateAsync, reloadAsync } from 'expo-updates';
 
 
 type ItemProps = { title: string, id: number };
@@ -48,6 +49,20 @@ export default function TabOneScreen() {
     setTodo("");
   }
 
+  async function onFetchUpdateAsync() {
+    try {
+      const update = await checkForUpdateAsync();
+
+      if (update.isAvailable) {
+        await fetchUpdateAsync();
+        await reloadAsync();
+      }
+    } catch (error) {
+      // You can also add an alert() to see the error message in case of an error when fetching updates.
+      alert(`Error fetching latest Expo update: ${error}`);
+    }
+  }
+
   const Item = ({ title, id }: ItemProps) => (
     <View className='flex-1 bg-white mt-3'>
       <View className='flex flex-row items-center justify-between bg-[#b9e2f5] border-[#50b8e7] w-full border px-2 py-1'>
@@ -66,23 +81,28 @@ export default function TabOneScreen() {
 
   return (
     <View className='px-3 flex-1 bg-white'>
-      <Button title='Resume' onPress={() => queryClient.resumePausedMutations()} />
       <TextInput placeholder='abcdef' value={todo} style={styles.input} onChangeText={setTodo} />
-      <Button
-        title="ADD ITEM"
-        color="#841584"
-        accessibilityLabel="Learn more about this purple button"
-        touchSoundDisabled={true}
-        onPress={() => mutate({ title: todo, completed: false, userId: generateUUID(2) }
-        )}
-      />
-      <Button
-        title="Refetch ITEMS"
-        color="red"
-        accessibilityLabel="Learn more about this purple button"
-        touchSoundDisabled={true}
-        onPress={() => refetch()}
-      />
+      <View className='py-4 h-32 flex flex-col justify-between'>
+        <Button
+          title="ADD ITEM"
+          color="#841584"
+          accessibilityLabel="Learn more about this purple button"
+          touchSoundDisabled={true}
+          onPress={() => mutate({ title: todo, completed: false, userId: generateUUID(2) }
+          )}
+        />
+        <Button
+          title="Refetch ITEMS"
+          color="red"
+          accessibilityLabel="Learn more about this purple button"
+          touchSoundDisabled={true}
+          onPress={() => refetch()}
+        />
+      </View>
+      <View className='py-4 h-32 flex flex-col justify-between'>
+        <Button title="Fetch update" color='green' onPress={onFetchUpdateAsync} />
+        <Button title='Resume' onPress={() => queryClient.resumePausedMutations()} />
+      </View>
       <FlatList data={todoList} renderItem={(item) => <Item title={item.item.title} id={item.item.id} />} />
     </View>
   );
