@@ -66,9 +66,7 @@ export default function TabOneScreen() {
 
   return (
     <View className='px-3 flex-1 bg-white'>
-      <button onClick={() => queryClient.resumePausedMutations()}>
-        <Text>Resume</Text>
-      </button>
+      <Button title='Resume' onPress={() => queryClient.resumePausedMutations()} />
       <TextInput placeholder='abcdef' value={todo} style={styles.input} onChangeText={setTodo} />
       <Button
         title="ADD ITEM"
