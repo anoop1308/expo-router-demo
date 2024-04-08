@@ -21,6 +21,7 @@ type dataProps = { title: string, completed: boolean, userId: number | string }
 
 export default function TabOneScreen() {
   const [todo, setTodo] = useState("");
+  const [isUpdateAvailable, setIsUpdateAvailable] = useState(false)
   const queryClient = useQueryClient();
   const { data: todoList, isLoading, refetch } = useQuery({
     queryKey: ["todos"],
@@ -54,6 +55,7 @@ export default function TabOneScreen() {
       const update = await checkForUpdateAsync();
 
       if (update.isAvailable) {
+        setIsUpdateAvailable(true);
         await fetchUpdateAsync();
         await reloadAsync();
       }
@@ -81,6 +83,7 @@ export default function TabOneScreen() {
 
   return (
     <View className='px-3 flex-1 bg-white'>
+      <Text>Update:- {isUpdateAvailable ? 'Available Hai' : 'Available Nahi Hai'}</Text>
       <TextInput placeholder='abcdef' value={todo} style={styles.input} onChangeText={setTodo} />
       <View className='py-4 h-32 flex flex-col justify-between'>
         <Button
