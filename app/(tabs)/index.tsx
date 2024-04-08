@@ -100,7 +100,7 @@ export default function TabOneScreen() {
         />
       </View>
       <View className='py-4 h-32 flex flex-col justify-between'>
-        <Button title="Fetch update" color='green' onPress={onFetchUpdateAsync} />
+        <Button title="Fetch update manually" color='green' onPress={onFetchUpdateAsync} />
         <Button title='Resume' onPress={() => queryClient.resumePausedMutations()} />
       </View>
       <FlatList data={todoList} renderItem={(item) => <Item title={item.item.title} id={item.item.id} />} />
@@ -119,9 +119,3 @@ const styles = StyleSheet.create({
     borderRadius: 5
   },
 });
-
-{/* <Link href='./user/1'>User - 1</Link>
-      <Link href={{
-        pathname: "/user/[id]",
-        params: { id: '2' }
-      }}>User - 2</Link> */}
