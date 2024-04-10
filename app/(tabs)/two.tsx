@@ -1,4 +1,4 @@
-import { StyleSheet, Alert, Modal, Text, Pressable, View } from 'react-native';
+import { StyleSheet, Alert, Modal, Text, Pressable, View, Button } from 'react-native';
 
 import EditScreenInfo from '@/components/EditScreenInfo';
 import { Link } from 'expo-router';
@@ -11,6 +11,20 @@ export default function TabTwoScreen() {
       <Link href='/modal'>
         <Text style={styles.title}>OPEN MODAL</Text>
       </Link>
+      <View className='py-4 h-32 flex flex-col justify-between'>
+        <Button
+          title="ADD ITEM"
+          color="#841584"
+          accessibilityLabel="Learn more about this purple button"
+          touchSoundDisabled={true}
+        />
+        <Button
+          title="Refetch ITEMS"
+          color="red"
+          accessibilityLabel="Learn more about this purple button"
+          touchSoundDisabled={true}
+        />
+      </View>
       <Modal
         animationType="fade"
         transparent={true}
