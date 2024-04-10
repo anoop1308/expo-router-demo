@@ -104,6 +104,7 @@ export default function TabOneScreen() {
       <View className='py-4 h-32 flex flex-col justify-between'>
         <Button title="Fetch update BUTTON" color='green' onPress={onFetchUpdateAsync} />
         <Button title='Resume' onPress={() => queryClient.resumePausedMutations()} />
+        <Button title='Dummy Button' color="red" />
       </View>
       <FlatList data={todoList} renderItem={(item) => <Item title={item.item.title} id={item.item.id} />} />
     </View>
