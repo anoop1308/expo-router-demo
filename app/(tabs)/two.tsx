@@ -18,12 +18,6 @@ export default function TabTwoScreen() {
           accessibilityLabel="Learn more about this purple button"
           touchSoundDisabled={true}
         />
-        <Button
-          title="Refetch ITEMS"
-          color="red"
-          accessibilityLabel="Learn more about this purple button"
-          touchSoundDisabled={true}
-        />
       </View>
       <Modal
         animationType="fade"
