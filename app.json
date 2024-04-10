@@ -12,7 +12,9 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.anoop1308.exporouterdemo"
@@ -32,9 +34,9 @@
     "plugins": [
       "expo-router",
       [
-        "expo-updates", 
-        { 
-          "username": "anoop1308" 
+        "expo-updates",
+        {
+          "username": "anoop1308"
         }
       ]
     ],
@@ -49,6 +51,15 @@
         "projectId": "241ed2e2-1acb-4f27-9470-167f2eb8f47c"
       }
     },
-    "owner": "anoop1308"
+    "owner": "anoop1308",
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/241ed2e2-1acb-4f27-9470-167f2eb8f47c",
+      "requestHeaders": {
+        "expo-channel-name": "main"
+      }
+    }
   }
 }

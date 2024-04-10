@@ -1,6 +1,6 @@
 import { Link } from 'expo-router';
 import Icon from 'react-native-vector-icons/Ionicons'
-import { Button, FlatList, StyleSheet, Text, TextInput, View } from 'react-native';
+import { Button, DevSettings, FlatList, StyleSheet, Text, TextInput, View } from 'react-native';
 import { useState } from 'react';
 import { useQueryClient, useMutation, useQuery } from '@tanstack/react-query';
 import { checkForUpdateAsync, fetchUpdateAsync, reloadAsync } from 'expo-updates';
@@ -53,11 +53,11 @@ export default function TabOneScreen() {
   async function onFetchUpdateAsync() {
     try {
       const update = await checkForUpdateAsync();
-
+      const reloadAsyncNew = __DEV__ ? DevSettings.reload : reloadAsync;
       if (update.isAvailable) {
         setIsUpdateAvailable(true);
         await fetchUpdateAsync();
-        await reloadAsync();
+        reloadAsyncNew();
       }
     } catch (error) {
       // You can also add an alert() to see the error message in case of an error when fetching updates.
