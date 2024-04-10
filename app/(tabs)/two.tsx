@@ -9,7 +9,7 @@ export default function TabTwoScreen() {
   return (
     <View style={styles.container}>
       <Link href='/modal'>
-        <Text style={styles.title}>OPEN MODAL</Text>
+        <Text style={styles.title}>OPEN MODAL By Clicking Me</Text>
       </Link>
       <View className='py-4 h-32 flex flex-col justify-between'>
         <Button
