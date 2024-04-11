@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check for EXPO_TOKEN
-        run: ${{ secrets.EAS_UPDATE_DEMO }}
+        run: echo ${{ secrets.EAS_UPDATE_DEMO }}
 
       - name: Checkout repository
         uses: actions/checkout@v3
