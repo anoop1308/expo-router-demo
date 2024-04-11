@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check for EXPO_TOKEN
-        run: ${{ secrets.EXPO_TOKEN }}
+        run: ${{ secrets.EAS_UPDATE_DEMO }}
 
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -22,10 +22,10 @@ jobs:
         uses: expo/expo-github-action@v8
         with:
           eas-version: latest
-          token: ${{ secrets.EXPO_TOKEN }}
+          token: ${{ secrets.EAS_UPDATE_DEMO }}
 
       - name: Install dependencies
         run: npm install
 
       - name: Publish update
-        run: eas update --auto
+        run: eas update --auto --non-interactive
